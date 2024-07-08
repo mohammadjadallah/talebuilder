@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact TaleBuilder</title>
+    <link rel="stylesheet" href="{{ url_for('.static', filename='css/contactus.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="contact-wrapper">
+        <div class="contact-form">
+            <h1>Contact Us</h1>
+            <form action="#">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+                
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="6" required></textarea>
+                
+                <div class="button-container">
+                    <button type="submit">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><b>&copy; 2024 TaleBuilder. All rights reserved.</b></p>
+        <div>
+            <a href="#" class="fa fa-instagram"></a>
+            <a href="#" class="fa fa-facebook"></a>
+            <a href="#" class="fa fa-linkedin"></a>
+            <a href="#" class="fa fa-google"></a>
+        </div>
+    </div>
+</body>
+</html>
