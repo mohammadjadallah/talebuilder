@@ -64,9 +64,9 @@
       <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo">
     </div>
     <div class="buttons">
-      <button class="header-btn"><a class="link-page" href="{{ url_for('index') }}">Home</a></button>
-      <button class="header-btn"><a class="link-page" href="{{ url_for('contactus') }}">Contact Us</a></button>
-      <button class="header-btn"><a class="link-page" href="{{ url_for('about') }}">About</a></button>
+      <button class="header-btn"><a class="link-page" target="_blank" href="{{ url_for('index') }}">Home</a></button>
+      <button class="header-btn"><a class="link-page" target="_blank" href="{{ url_for('contactus') }}">Contact Us</a></button>
+      <button class="header-btn"><a class="link-page" target="_blank" href="{{ url_for('about') }}">About</a></button>
     </div>
   </header>
 
@@ -83,15 +83,23 @@
         <button class="card-btn" id="process-btn">Make a Story</button>
         <button class="card-btn" id="speak-btn">Tell the Story</button>
         
-          <select class="voice-select">
+          <select class="voice-select" id="voice-select">
             <option value="Rachel">Rachel (Default)</option>
             <option value="Adam">Adam</option>
             <option value="Antoni">Antoni</option>
             <option value="Arnold">Arnold</option>
-            <option value="Bella">Bella</option>
             <option value="Callum">Callum</option>
             <option value="Charlie">Charlie</option>
-            <option value="Dorothy">Dorothy</option>
+            <option value="Dorothy">Rachel</option>
+            <option value="Dorothy">Drew</option>
+            <option value="Dorothy">Clyde</option>
+            <option value="Dorothy">Paul</option>
+            <option value="Dorothy">Domi</option>
+            <option value="Dorothy">Dave</option>
+            <option value="Dorothy">Fin</option>
+            <option value="Dorothy">Sarah</option>
+            <option value="Dorothy">Thomas</option>
+            <option value="Dorothy">George</option>
           </select>
       </div>
 
@@ -171,36 +179,33 @@
     document.getElementById('speak-btn').addEventListener('click', async () => {
       const text = document.getElementById('result-box').innerText;
       const resultBox = document.getElementById('result-box');
+      const voiceSelect = document.getElementById('voice-select');
+      const selectedVoice = voiceSelect.value;
 
       if (text) {
-        // Show loading spinner/message
-        const loadingSpinner = document.createElement('div');
-        loadingSpinner.classList.add('loading-overlay');
-        loadingSpinner.innerHTML = `
-          <div class="loader"></div>
-        `;
-        resultBox.appendChild(loadingSpinner);
+        try {
+          // Show loading spinner/message
+          const loadingSpinner = document.createElement('div');
+          loadingSpinner.classList.add('loading-overlay');
+          loadingSpinner.innerHTML = `
+            <div class="loader"></div>
+          `;
+          resultBox.appendChild(loadingSpinner);
 
-        setTimeout(() => {
-          resultBox.removeChild(loadingSpinner);
-        }, 25000); // 25 seconds
-
-        const response = await fetch('/text_to_speech', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ text }),
-        });
-
-        if (response.ok) {
-          console.log('Speech generation request sent successfully.');
-        } else {
-          const errorText = await response.text();
-          console.error('Failed to generate speech:', errorText);
-          alert('Failed to generate speech. Please try again.');
+          const response = await fetch('/text_to_speech', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text, voice: selectedVoice }),
+          });
+          
+          resultBox.removeChild(loadingSpinner);   
+          
+        } catch (error) {
+          console.error('Error generating speech:', error);
+          alert('Error generating speech. Please try again.');
         }
-
       } else {
         alert('No text to speak.');
       }

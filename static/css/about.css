@@ -131,6 +131,11 @@ body {
     margin: 20px 0;
 }
 
+.link-page {
+    text-decoration: none;
+    color: white;
+  }
+
 .btn {
     border: none;
     font-size: 0.9rem;
