@@ -1,4 +1,4 @@
-# TaleBuilder
+<h1 align="center">TaleBuilder</h1>
 
 
 <h2 align="center">Turn Your Data into a Compelling Narrative</h2>
